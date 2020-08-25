@@ -89,13 +89,14 @@ critical <- mcconnell_spr %>%
 
 ## Basic (example) model
 ```{r}
-basic_mdl <- lmer(logRT ~ word_length_z + log_w2_freq_z + log_w1_freq_z + trial_number + log_bigram_z + (1|id) + (1|ItemID), data=critical)
+basic_mdl <- lmer(logRT ~ tp_b_lemma + word_length_z + log_w2_freq_z + log_w1_freq_z + trial_number + log_bigram_z + (1|id) + (1+tp_b_lemma|ItemID), data=critical)
 summary(basic_mdl)
 ```
 
 My general plan would then be to compare fit to models including one collocation measure each (as they are relatively strongly correlated), and select the model with the lowest AIC.
 
 ## Main questions
+Best random effects structure, general best practices
 
 Control vs. critical pairs:
 Is it possible to use RT differences from critical to control pairs (A-C and B-D, above) as the dependent variable? 
